@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as ArticlesRouteImport } from './routes/articles'
 import { Route as AboutRouteImport } from './routes/about'
@@ -16,6 +17,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CategoriesSlugRouteImport } from './routes/categories.$slug'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CategoriesRoute = CategoriesRouteImport.update({
   id: '/categories',
   path: '/categories',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/articles': typeof ArticlesRouteWithChildren
   '/categories': typeof CategoriesRouteWithChildren
+  '/contact': typeof ContactRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/categories/$slug': typeof CategoriesSlugRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/articles': typeof ArticlesRouteWithChildren
   '/categories': typeof CategoriesRouteWithChildren
+  '/contact': typeof ContactRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/categories/$slug': typeof CategoriesSlugRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/articles': typeof ArticlesRouteWithChildren
   '/categories': typeof CategoriesRouteWithChildren
+  '/contact': typeof ContactRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/categories/$slug': typeof CategoriesSlugRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/articles'
     | '/categories'
+    | '/contact'
     | '/articles/$slug'
     | '/categories/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/articles'
     | '/categories'
+    | '/contact'
     | '/articles/$slug'
     | '/categories/$slug'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/articles'
     | '/categories'
+    | '/contact'
     | '/articles/$slug'
     | '/categories/$slug'
   fileRoutesById: FileRoutesById
@@ -104,10 +116,18 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ArticlesRoute: typeof ArticlesRouteWithChildren
   CategoriesRoute: typeof CategoriesRouteWithChildren
+  ContactRoute: typeof ContactRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/categories': {
       id: '/categories'
       path: '/categories'
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ArticlesRoute: ArticlesRouteWithChildren,
   CategoriesRoute: CategoriesRouteWithChildren,
+  ContactRoute: ContactRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
