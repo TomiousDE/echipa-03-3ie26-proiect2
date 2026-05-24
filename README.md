@@ -1,5 +1,5 @@
 
-# Sarcini/Atributii:
+## Sarcini/Atributii:
 
 **`Botea Robert:`** text
 
@@ -9,5 +9,5 @@
 
 **`Ungureanu Cristian:`** text
 
-## sursa/model de inspiratie 
+## Sursa/model de inspiratie 
 Site-urile realizate la tema 1 si proiectul 1
