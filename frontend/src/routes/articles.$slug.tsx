@@ -44,11 +44,13 @@ function ArticlePage() {
       <div className="mt-8 overflow-hidden rounded-xl">
         <SmartImage src={strapiImage(article.cover)} alt={article.title} />
       </div>
+      
       {typeof article.content === "string" && (
         <div className="prose prose-neutral mt-10 max-w-none whitespace-pre-wrap text-base leading-relaxed text-foreground/90">
           {article.content}
         </div>
       )}
+
       {Array.isArray(article.blocks) && article.blocks.length > 0 && (
         <div className="mt-10 space-y-6">
           {article.blocks.map((b, i) => {
