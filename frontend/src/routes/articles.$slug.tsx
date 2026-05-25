@@ -79,12 +79,18 @@ function ArticlePage() {
       {Array.isArray(article.blocks) && article.blocks.length > 0 && (
         <div className="mt-10 space-y-6">
           {article.blocks.map((b, i) => {
-            const block = b as { __component?: string; body?: string; title?: string; file?: { url?: string; alternativeText?: string }; files?: { url?: string; alternativeText?: string }[] };
-            
+            const block = b as {
+              __component?: string;
+              body?: string;
+              title?: string;
+              file?: { url?: string; alternativeText?: string; formats?: { large?: { url: string } } };
+              files?: { url?: string; alternativeText?: string; formats?: { large?: { url: string } } }[];
+            };
+
             if (block.__component === "shared.rich-text" && block.body) {
               return <p key={i} className="whitespace-pre-wrap text-base leading-relaxed">{block.body}</p>;
             }
-            
+
             if (block.__component === "shared.quote") {
               return (
                 <blockquote key={i} className="border-l-4 border-primary pl-4 italic text-muted-foreground">
@@ -94,11 +100,12 @@ function ArticlePage() {
               );
             }
 
-            if (block.__component === "shared.media" && block.file?.url) {
+            if (block.__component === "shared.media" && block.file) {
+              const url = block.file.formats?.large?.url || block.file.url;
               return (
                 <div key={i} className="overflow-hidden rounded-xl">
                   <img
-                    src={block.file.url}
+                    src={url}
                     alt={block.file.alternativeText || ""}
                     className="w-full object-cover"
                   />
@@ -112,9 +119,9 @@ function ArticlePage() {
                   {block.files.map((file, j) => (
                     <div key={j} className="overflow-hidden rounded-xl">
                       <img
-                        src={file.url}
+                        src={file.formats?.large?.url || file.url}
                         alt={file.alternativeText || ""}
-                        className="w-full object-cover"
+                        className="w-full object-cover aspect-video"
                       />
                     </div>
                   ))}

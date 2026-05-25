@@ -91,7 +91,6 @@ async function request<T>(path: string, params?: Record<string, string | number>
   if (params) {
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, String(v)));
   }
-  if (!url.searchParams.has("populate")) url.searchParams.set("populate", "*");
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`Strapi ${res.status}: ${res.statusText}`);
   return (await res.json()) as T;
@@ -111,14 +110,20 @@ export const strapi = {
     return request<StrapiResponse<Article[]>>("/articles", params);
   },
   async getArticle(slugOrId: string) {
-    // try by slug first
     const bySlug = await request<StrapiResponse<Article[]>>("/articles", {
       "filters[slug][$eq]": slugOrId,
-      populate: "*",
+      "populate[blocks][populate]": "*",
+      "populate[cover]": "true",
+      "populate[author]": "true",
+      "populate[category]": "true",
     });
     if (bySlug.data?.length) return bySlug.data[0];
-    // fallback by documentId
-    const byId = await request<StrapiResponse<Article>>(`/articles/${slugOrId}`);
+    const byId = await request<StrapiResponse<Article>>(`/articles/${slugOrId}`, {
+      "populate[blocks][populate]": "*",
+      "populate[cover]": "true",
+      "populate[author]": "true",
+      "populate[category]": "true",
+    });
     return byId.data;
   },
   async getCategories(opts: { search?: string } = {}) {
