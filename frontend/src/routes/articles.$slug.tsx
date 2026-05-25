@@ -79,10 +79,12 @@ function ArticlePage() {
       {Array.isArray(article.blocks) && article.blocks.length > 0 && (
         <div className="mt-10 space-y-6">
           {article.blocks.map((b, i) => {
-            const block = b as { __component?: string; body?: string; title?: string };
+            const block = b as { __component?: string; body?: string; title?: string; file?: { url?: string; alternativeText?: string }; files?: { url?: string; alternativeText?: string }[] };
+            
             if (block.__component === "shared.rich-text" && block.body) {
               return <p key={i} className="whitespace-pre-wrap text-base leading-relaxed">{block.body}</p>;
             }
+            
             if (block.__component === "shared.quote") {
               return (
                 <blockquote key={i} className="border-l-4 border-primary pl-4 italic text-muted-foreground">
@@ -91,6 +93,35 @@ function ArticlePage() {
                 </blockquote>
               );
             }
+
+            if (block.__component === "shared.media" && block.file?.url) {
+              return (
+                <div key={i} className="overflow-hidden rounded-xl">
+                  <img
+                    src={block.file.url}
+                    alt={block.file.alternativeText || ""}
+                    className="w-full object-cover"
+                  />
+                </div>
+              );
+            }
+
+            if (block.__component === "shared.slider" && Array.isArray(block.files)) {
+              return (
+                <div key={i} className="grid gap-4 sm:grid-cols-2">
+                  {block.files.map((file, j) => (
+                    <div key={j} className="overflow-hidden rounded-xl">
+                      <img
+                        src={file.url}
+                        alt={file.alternativeText || ""}
+                        className="w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              );
+            }
+
             return null;
           })}
         </div>
