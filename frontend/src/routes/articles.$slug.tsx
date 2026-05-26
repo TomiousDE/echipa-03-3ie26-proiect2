@@ -13,9 +13,126 @@ export const Route = createFileRoute("/articles/$slug")({
 
 // Sterge linia asta si adauga cod pagina Servicii
 
-// Sterge linia asta si adauga cod pagina Termeni&Conditii
+const termeniSections = [
+  {
+	title: "1. Acceptarea Termenilor",
+	content: "Prin accesarea și utilizarea platformei NexaTech Solutions, confirmați că ați citit, înțeles și acceptat toți termenii și condițiile prezentului acord. Dacă nu sunteți de acord cu acești termeni, vă rugăm să nu utilizați serviciile noastre.",
+  },
+  {
+	title: "2. Serviciile Oferite",
+	content: "NexaTech Solutions oferă servicii de dezvoltare software, consultanță IT, infrastructură cloud și securitate cibernetică. Ne rezervăm dreptul de a modifica, suspenda sau întrerupe orice serviciu în orice moment, cu notificare prealabilă de minimum 30 de zile.",
+  },
+  {
+	title: "3. Proprietatea Intelectuală",
+	content: "Toate materialele, codul sursă și conținutul livrat în cadrul proiectelor devin proprietatea clientului după achitarea integrală a serviciilor. NexaTech Solutions își rezervă dreptul de a utiliza proiectele finalizate ca referință în portofoliu, cu acordul prealabil al clientului.",
+  },
+  {
+	title: "4. Confidențialitate și Protecția Datelor",
+	content: "Ne angajăm să protejăm informațiile confidențiale ale clienților conform GDPR și legislației române în vigoare. Datele colectate sunt utilizate exclusiv pentru furnizarea serviciilor contractate și nu vor fi transmise terților fără consimțământul explicit al clientului.",
+  },
+  {
+	title: "5. Limitarea Răspunderii",
+	content: "NexaTech Solutions nu poate fi responsabilă pentru daune indirecte, incidentale sau consecvente rezultate din utilizarea serviciilor noastre. Răspunderea noastră totală nu va depăși valoarea contractului încheiat cu clientul respectiv.",
+  },
+  {
+	title: "6. Garanție și Suport",
+	content: "Oferim garanție de 6 luni pentru bug-uri identificate după lansarea proiectului, cu condiția că acestea nu sunt cauzate de modificări efectuate de client. Suportul tehnic este disponibil conform SLA-urilor agreate în contractul de servicii.",
+  },
+  {
+	title: "7. Plăți și Facturare",
+	content: "Plățile se efectuează conform graficului stabilit în contract. Întârzierile la plată pot duce la suspendarea serviciilor, cu notificare prealabilă de 7 zile. Toate prețurile sunt exprimate în EUR și nu includ TVA.",
+  },
+  {
+	title: "8. Modificarea Termenilor",
+	content: "NexaTech Solutions își rezervă dreptul de a actualiza acești termeni în orice moment. Clienții vor fi notificați prin email cu minimum 14 zile înainte de intrarea în vigoare a modificărilor. Continuarea utilizării serviciilor după această dată constituie acceptarea noilor termeni.",
+  },
+];
+ 
+function TermeniContent() {
+  return (
+	<div className="space-y-4">
+  	<p className="text-muted-foreground leading-relaxed border-l-4 border-primary pl-4 italic">
+    	Ultima actualizare: Mai 2026. Vă rugăm să citiți cu atenție acești termeni înainte de a utiliza serviciile NexaTech Solutions.
+  	</p>
+      {termeniSections.map((section) => (
+    	<div key={section.title} className="rounded-xl border border-border bg-card p-6">
+      	<h3 className="font-bold text-lg mb-2">{section.title}</h3>
+      	<p className="text-muted-foreground leading-relaxed">{section.content}</p>
+        </div>
+  	))}
+	</div>
+  );
+}
 
-// Sterge linia asta si adauga cod Tehnologii
+
+const tehnologiiItems = [
+  {
+	category: "Frontend",
+	color: "bg-blue-500/10 text-blue-500",
+	techs: [
+  	{ name: "React", desc: "Librărie JavaScript pentru interfețe dinamice și reactive." },
+  	{ name: "TypeScript", desc: "Superset JavaScript cu tipare statice pentru cod robust." },
+  	{ name: "Tailwind CSS", desc: "Framework CSS utility-first pentru design rapid și consistent." },
+  	{ name: "Next.js", desc: "Framework React cu SSR și SSG pentru aplicații performante." },
+	],
+  },
+  {
+	category: "Backend",
+	color: "bg-green-500/10 text-green-500",
+	techs: [
+  	{ name: "Node.js", desc: "Runtime JavaScript pentru aplicații server-side scalabile." },
+  	{ name: "Python", desc: "Limbaj versatil pentru API-uri, AI și automatizare." },
+  	{ name: "Strapi", desc: "Headless CMS open-source pentru gestionarea conținutului." },
+  	{ name: ".NET", desc: "Platformă Microsoft pentru aplicații enterprise robuste." },
+	],
+  },
+  {
+	category: "Cloud & DevOps",
+	color: "bg-orange-500/10 text-orange-500",
+	techs: [
+  	{ name: "AWS", desc: "Amazon Web Services — lider mondial în servicii cloud." },
+  	{ name: "Azure", desc: "Platforma cloud Microsoft pentru soluții enterprise." },
+  	{ name: "Docker", desc: "Containerizare pentru deployment consistent și portabil." },
+  	{ name: "Kubernetes", desc: "Orchestrare containere pentru scalabilitate automată." },
+	],
+  },
+  {
+	category: "Baze de Date",
+	color: "bg-purple-500/10 text-purple-500",
+	techs: [
+  	{ name: "PostgreSQL", desc: "Bază de date relațională open-source de înaltă performanță." },
+  	{ name: "MongoDB", desc: "Bază de date NoSQL pentru date flexibile și scalabile." },
+  	{ name: "Redis", desc: "Stocare în memorie pentru caching și sesiuni rapide." },
+  	{ name: "MySQL", desc: "Sistem de management al bazelor de date relaționale." },
+	],
+  },
+];
+ 
+function TehnologiiContent() {
+  return (
+	<div className="space-y-8">
+      {tehnologiiItems.map((group) => (
+    	<div key={group.category}>
+      	<h2 className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 ${group.color}`}>
+            {group.category}
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {group.techs.map((tech) => (
+              <div key={tech.name} className="rounded-xl border border-border bg-card p-4 flex items-start gap-3">
+                <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${group.color.split(" ")[0]}`} />
+                <div>
+                  <h3 className="font-semibold">{tech.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5">{tech.desc}</p>
+                </div>
+              </div>
+        	))}
+          </div>
+        </div>
+  	))}
+	</div>
+  );
+}
+
 
 function ArticlePage() {
   const { slug } = Route.useParams();

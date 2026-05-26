@@ -3,7 +3,8 @@
 
 **`Botea Robert:`** text
 
-**`Cinade Mihai:`** text
+**`Cinade Mihai:`** Am lucrat la paginile Tehnologii și Termeni și Condiții. Am structurat conținutul tehnic într-un format vizual clar, am realizat ajustări de layout și am îmbunătățit prezentarea generală a secțiunilor pentru o experiență mai plăcută utilizatorului.
+
 
 **`Toma Vlad-Ionut:`** Am generat interfata cu lovable. Creat repo pe github. Configurat Strapi + Netlify. Configurat Collection Types (Categorii, Articole). Adaugat "Pages" in Collection Types, prin vs code. Retusat Homepage, navbar/meniuri. Configurat footer. Adaugat theme Tailwind. Adaugat buton light/dark in navbar. Plus coordonarea proiectului.
 
