@@ -56,15 +56,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "NexaTech Solutions" },
+      { title: "StrapiBlog — Stories, ideas, and inspiration" },
       { name: "description", content: "A modern blog powered by Strapi CMS and TanStack Start." },
     ],
-  links: [
-    { rel: "stylesheet", href: appCss },
-    { rel: "preconnect", href: "https://fonts.googleapis.com" },
-    { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
-    { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" },
-  ],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -75,15 +75,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            const theme = localStorage.getItem('theme') || 'dark';
-            if (theme === 'dark') document.documentElement.classList.add('dark');
-          `
-        }} />
-        <HeadContent />
-      </head>
+      <head><HeadContent /></head>
       <body>{children}<Scripts /></body>
     </html>
   );
@@ -93,9 +85,9 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col font-sans">
+      <div className="flex min-h-screen flex-col">
         <Navbar />
-        <main className="flex-1 pt-16">
+        <main className="flex-1">
           <Outlet />
         </main>
         <Footer />
