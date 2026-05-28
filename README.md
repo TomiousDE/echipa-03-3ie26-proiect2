@@ -12,3 +12,6 @@
 
 ## Sursa/model de inspiratie 
 Site-urile realizate la tema 1 si proiectul 1
+
+## Observatii
+Am facut un fork pentru repo-ul de pe github. Am conectat fork-ul la un cont Netlify nou. Pe primul cont de Netlify am epuizat creditele inainte sa terminam proiectul.
