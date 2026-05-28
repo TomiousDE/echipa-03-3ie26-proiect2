@@ -78,7 +78,7 @@ const values = [
 
 function AboutPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 space-y-20">
+    <div className="mx-auto max-w-6xl px-4 py-12 pt-20 space-y-20">
 
       {/* Hero */}
       <div className="text-center space-y-4">

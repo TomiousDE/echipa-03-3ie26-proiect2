@@ -23,7 +23,7 @@ function CategoriesPage() {
   );
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12">
+    <section className="mx-auto max-w-6xl px-4 py-12 pt-20 space-y-20">
       <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-4xl font-bold">Categories</h1>
